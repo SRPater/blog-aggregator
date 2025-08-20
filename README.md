@@ -1,2 +1,3 @@
-# blog-aggregator
-Boot.dev Back-end Developer Path - Guided Project - 18. Build a Blog Aggregator in TypeScript
+# Build a Blog Aggregator in TypeScript
+
+Build a blog aggregator microservice in TypeScript. Put your API, database, and web scraping skills to the test.
