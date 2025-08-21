@@ -1,29 +1,34 @@
 import { setUser } from "../config";
-import { createUser, getUserByName } from "src/lib/db/queries/users";
+import { createUser, getUser } from "src/lib/db/queries/users";
 
 export async function handlerLogin(cmdName: string, ...args: string[]) {
-    if (args.length === 0) {
-        throw new Error("Username is required");
+    if (args.length !== 1) {
+        throw new Error(`usage: ${cmdName} <name>`);
     }
 
-    setUser(args[0]);
-    console.log("User set");
+    const userName = args[0];
+    const existingUser = await getUser(userName);
+
+    if (!existingUser) {
+        throw new Error(`User ${userName} not found`);
+    }
+
+    setUser(existingUser.name);
+    console.log("User switched successfully!");
 }
 
 export async function handlerRegister(cmdName: string, ...args: string[]) {
-    if (args.length === 0) {
-        throw new Error("Username is required");
+    if (args.length !== 1) {
+        throw new Error(`usage: ${cmdName} <name>`);
     }
 
-    if (await getUserByName(args[0])) {
-        throw new Error("User already exists");
+    const userName = args[0];
+    const user = await createUser(userName);
+
+    if (!user) {
+        throw new Error(`User ${userName} not found`);
     }
 
-    const newUser = await createUser(args[0]);
-    setUser(newUser.name);
-    console.log("User was created:");
-    console.log(`id: ${newUser.id}`);
-    console.log(`created at: ${newUser.createdAt}`);
-    console.log(`updated at: ${newUser.updatedAt}`);
-    console.log(`name: ${newUser.name}`);
+    setUser(user.name);
+    console.log("User created successfully!");
 }

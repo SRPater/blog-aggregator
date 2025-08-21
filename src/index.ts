@@ -8,14 +8,15 @@ import { handlerLogin, handlerRegister } from "./commands/users";
 async function main() {
     const args = process.argv.slice(2);
 
-    if (args.length === 0) {
-        console.log("not enough arguments");
+    if (args.length < 1) {
+        console.log("usage: cli <command> [args...]");
         process.exit(1);
     }
 
     const cmdName = args[0];
     const cmdArgs = args.slice(1);
     const commandsRegistry: CommandsRegistry = {}
+
     registerCommand(commandsRegistry, "login", handlerLogin);
     registerCommand(commandsRegistry, "register", handlerRegister);
 
@@ -23,9 +24,9 @@ async function main() {
         await runCommand(commandsRegistry, cmdName, ...cmdArgs);
     } catch (err) {
         if (err instanceof Error) {
-            console.error(err.message);
+            console.error(`Error running comman ${cmdName}: ${err.message}`);
         } else {
-            console.error(err);
+            console.error(`Error running command ${cmdName}: ${err}`);
         }
 
         process.exit(1);
