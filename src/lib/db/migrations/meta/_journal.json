@@ -8,6 +8,13 @@
       "when": 1755771466387,
       "tag": "0000_cynical_solo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1755787466254,
+      "tag": "0001_robust_quasimodo",
+      "breakpoints": true
     }
   ]
 }

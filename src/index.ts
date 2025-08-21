@@ -3,8 +3,14 @@ import {
     registerCommand,
     runCommand,
 } from "./commands/commands";
-import { handlerLogin, handlerRegister } from "./commands/users";
+import {
+    handlerListUsers,
+    handlerLogin,
+    handlerRegister,
+} from "./commands/users";
 import { handlerReset } from "./commands/reset";
+import { handlerAgg } from "./commands/aggregate";
+import { handlerAddFeed } from "./commands/feeds";
 
 async function main() {
     const args = process.argv.slice(2);
@@ -21,12 +27,15 @@ async function main() {
     registerCommand(commandsRegistry, "login", handlerLogin);
     registerCommand(commandsRegistry, "register", handlerRegister);
     registerCommand(commandsRegistry, "reset", handlerReset);
+    registerCommand(commandsRegistry, "users", handlerListUsers);
+    registerCommand(commandsRegistry, "agg", handlerAgg);
+    registerCommand(commandsRegistry, "addfeed", handlerAddFeed);
 
     try {
         await runCommand(commandsRegistry, cmdName, ...cmdArgs);
     } catch (err) {
         if (err instanceof Error) {
-            console.error(`Error running comman ${cmdName}: ${err.message}`);
+            console.error(`Error running command ${cmdName}: ${err.message}`);
         } else {
             console.error(`Error running command ${cmdName}: ${err}`);
         }
