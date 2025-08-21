@@ -1,0 +1,26 @@
+{
+  "name": "blog-aggregator",
+  "version": "1.0.0",
+  "description": "Build a blog aggregator microservice in TypeScript. Put your API, database, and web scraping skills to the test.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SRPater/blog-aggregator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SRPater/blog-aggregator/issues"
+  },
+  "homepage": "https://github.com/SRPater/blog-aggregator#readme",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}
