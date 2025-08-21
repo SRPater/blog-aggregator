@@ -12,9 +12,13 @@ export async function createFeed(
         .values({
             name: feedName,
             url: url,
-            user_id: userId,
+            userId: userId,
         })
         .returning();
 
     return firstOrUndefined(result);
+}
+
+export async function getFeeds() {
+    return db.select().from(feeds);
 }
